@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from community.models import Article
+from django.shortcuts import get_object_or_404
+
 
 # Create your views here.
 def index(request):
@@ -21,3 +23,12 @@ def create_article(request):
         user = request.user
         Article.objects.create(title=title, content=content, user=user)
         return redirect('community:index')
+    
+    
+def article_detail(request, article_id):
+    # article = Article.objects.get(id=article_id)
+    article = get_object_or_404(Article, id=article_id)
+    context = {
+        'article': article
+    }
+    return render(request, 'article_detail.html', context)
