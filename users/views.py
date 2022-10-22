@@ -32,18 +32,21 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             loginsession(request, user)
-            # Redirect to a success page.ee
-            return redirect('users:user')
+            # 로그인 성공하면 index 페이지로 이동
+            return redirect('community:index')
         else:
             # Redirect to a success page.
             return HttpResponse("로그인 실패.")
                         
                         
-def user(request):
-    return HttpResponse(request.user)
+# def user(request):
+#     return HttpResponse(request.user)
 
 def profile(request, username):
     user = get_object_or_404(User, username=username)
+    
+    for article in user.article_set.all():
+        print(article)
     context = {
         'user': user
     }
