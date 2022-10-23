@@ -14,7 +14,7 @@
             <a href="{% url 'community:article_detail' article.id %}">상세 페이지로 이동</a>
 
         <div>(count 를 쓴 방법) 댓글 갯수 : {{ article.comment_set.all.count }}</div>
-        <div>(두번째 방법) 댓글 갯수 : {{ article.num_comments }}</div>
+        <div>(aggregation) 댓글 갯수 : {{ article.num_comments }}</div>
     </div>
     {% endfor %}
 </body>
